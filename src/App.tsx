@@ -1,7 +1,10 @@
-import React from 'react';
+import loadable from '@loadable/component';
 import { BrowserRouter  , Routes , Route , Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+
+
+const Login = loadable(() => import('./pages/Login'));
+const SignUp = loadable(() => import('./pages/SignUp'));
+
 
 function App() {
   return (
