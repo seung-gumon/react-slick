@@ -37,11 +37,10 @@ const SignUp = () => {
     (e) => {
       e.preventDefault();
       if (!mismatchError && nickname) {
-        console.log('서버로 회원가입하기');
         setSignUpError('');
         setSignUpSuccess(false);
         axios
-          .post('/api/users', {
+          .post('http://localhost:3095/api/users', {
             email,
             nickname,
             password,

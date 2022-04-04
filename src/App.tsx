@@ -1,10 +1,9 @@
 import loadable from '@loadable/component';
-import { BrowserRouter  , Routes , Route , Navigate } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 const Login = loadable(() => import('./pages/Login'));
 const SignUp = loadable(() => import('./pages/SignUp'));
-
+const Channel = loadable(() => import('./pages/Channel'));
 
 function App() {
   return (
@@ -12,7 +11,8 @@ function App() {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="sign-up" element={<SignUp />} />
-        <Route path="*" element={<Navigate replace to="/login"/>} />
+        <Route path="workspace/sleact/channel" element={<Channel />} />
+        <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>
     </BrowserRouter>
   );
