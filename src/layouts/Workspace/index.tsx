@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { Navigate, Routes, Route } from 'react-router';
 import useSWR from 'swr';
 import fetcher from '../../utils/fetcher';
@@ -18,13 +18,17 @@ import {
   Chats,
 } from '../Workspace/styles';
 import gravatar from 'gravatar';
+import loadable from '@loadable/component';
+
+const Channel = loadable(() => import('../../pages/Channel'));
+const DirectMessage = loadable(() => import('../../pages/DirectMessage'));
 
 const Workspace: FC = ({ children }) => {
-  const { data, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
+  const { data, mutate, error } = useSWR('http://localhost:8080/api/users', fetcher);
 
   const logOut = useCallback(() => {
     axios
-      .post('http://localhost:3095/api/users/logout', null, {
+      .post('http://localhost:8080/api/users/logout', null, {
         withCredentials: true,
       })
       .then(() => {
@@ -32,8 +36,10 @@ const Workspace: FC = ({ children }) => {
       });
   }, []);
 
+  if (error) return <Navigate to="/login" />;
+
   if (!data) {
-    return <Navigate to="/login" />;
+    return <div>failed to load</div>;
   }
 
   return (
@@ -81,10 +87,10 @@ const Workspace: FC = ({ children }) => {
           </MenuScroll>
         </Channels>
         <Chats>
-          {/* <Routes>
-            <Route path="/workspace/:workspace/channel/:channel" component={Channel} />
-            <Route path="/workspace/:workspace/dm/:id" component={DirectMessage} />
-          </Routes> */}
+          <Routes>
+            <Route path="sleact/channel" element={<Channel />} />
+            <Route path="dm" element={<DirectMessage />} />
+          </Routes>
         </Chats>
       </WorkspaceWrapper>
       {children}

@@ -40,7 +40,7 @@ const SignUp = () => {
         setSignUpError('');
         setSignUpSuccess(false);
         axios
-          .post('http://localhost:3095/api/users', {
+          .post('http://localhost:8080/api/users', {
             email,
             nickname,
             password,
