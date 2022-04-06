@@ -39,7 +39,7 @@ const LogIn = () => {
   }
 
   if (data) {
-    return <Navigate to="/workspace/sleact/channel" />;
+    return <Navigate to="/workspace/sleact/channel/일반" />;
   }
 
   return (

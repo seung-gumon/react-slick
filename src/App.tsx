@@ -12,7 +12,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="workspace/*" element={<Workspace />} />
-        {/* <Route path="*" element={<Navigate replace to="/login" />} /> */}
+        <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>
     </BrowserRouter>
   );
